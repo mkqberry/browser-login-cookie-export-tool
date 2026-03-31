@@ -1,4 +1,4 @@
-# Youtube Login Tool
+# Automated Browser Login and Cookie Export Tool
 
 This repository contains a sanitized Python project prepared for public open-source release.
 
