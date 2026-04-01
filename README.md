@@ -1,31 +1,45 @@
-# Automated Browser Login and Cookie Export Tool
+# YouTube Login Tool
 
-This repository contains a sanitized Python project prepared for public open-source release.
+Automate browser login to YouTube and export session cookies. Used to bypass rate limits and authentication requirements in downstream data collection tools.
 
 ## Features
 
-- Modular source code under `src/`
-- Runnable utilities under `scripts/`
-- Config templates under `configs/`
-- Examples and tests directories for extensibility
+- Selenium-based browser automation
+- YouTube login handling (2FA support)
+- Cookie extraction and serialization
+- Cookie refresh capability
+- Account rotation for multi-user scenarios
 
 ## Setup
 
-1. Create a virtual environment.
-2. Install dependencies:
-   - `pip install -r requirements.txt`
-3. Copy `.env.example` to `.env` and fill values.
+```bash
+pip install -r requirements.txt
+```
+
+Download ChromeDriver matching your Chrome version:
+https://chromedriver.chromium.org/
 
 ## Usage
 
-Run:
+Login and export cookies:
 
-`python scripts/run_pipeline.py`
+```bash
+python scripts/main.py \
+  --email your.email@gmail.com \
+  --password your-password \
+  --output cookies.txt \
+  --headless false  # Show browser for 2FA
+```
 
-## Folder Structure
+With multiple accounts (for rotation):
 
-- `src/` core logic
-- `scripts/` runnable scripts
-- `configs/` configuration files
-- `examples/` usage examples
-- `tests/` tests
+```bash
+python scripts/main.py \
+  --account-list accounts.csv \
+  --output-dir cookies_per_account/ \
+  --rotate true
+```
+
+## Stored Format
+
+Cookies exported as Netscape cookie file (compatible with curl, aria2, yt-dlp).
